@@ -8,7 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 public class Main {
-	public static int THREAD_SIZE = 1;
+	public static int THREAD_SIZE = 60000;
 	
 	public static void main(String[] args) throws IOException {
 		LinkedHashSet<String> lhs = new LinkedHashSet<String>();
