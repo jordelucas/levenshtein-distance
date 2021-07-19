@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 public class LevenshteinDistance {
 
-	static int calculate(String x, String y) {
+	public int calculate(String x, String y) {
 		int[][] dp = new int[x.length() + 1][y.length() + 1];
 
 	    for (int i = 0; i <= x.length(); i++) {
@@ -26,11 +26,11 @@ public class LevenshteinDistance {
 	    return dp[x.length()][y.length()];
     }
 
-    public static int costOfSubstitution(char a, char b) {
+    private static int costOfSubstitution(char a, char b) {
         return a == b ? 0 : 1;
     }
 
-    public static int min(int... numbers) {
+    private static int min(int... numbers) {
         return Arrays.stream(numbers)
           .min().orElse(Integer.MAX_VALUE);
     }
