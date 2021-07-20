@@ -7,8 +7,8 @@ public class SearchWord implements Runnable {
 	private List<String> list;
 	private String username_to_search;
 	
-	private String username_best_distance = "oto";
-	private int value_best_distance = 100;
+	private static volatile String username_best_distance;
+	private static volatile int value_best_distance = 100;
 	
 	public SearchWord(List<String> list, String username_to_search, int range) {
 		this.list = list;
@@ -19,7 +19,7 @@ public class SearchWord implements Runnable {
 	public SearchWord() {}
 	
 	public String getUsername_best_distance() {
-		return this.username_best_distance;
+		return username_best_distance;
 	}
 
 	public String search(List<String> list, String username_to_search, int total_threads) {
@@ -55,17 +55,20 @@ public class SearchWord implements Runnable {
 //		System.out.println(range);
 		for(int j = thread_order * range; j <= ((thread_order + 1) * range) - 1; j++) {
 			if(j >= list.size()) {
-				break;
+				return;
 			}
+
 			String current_username = list.get(j);
 
-    		int current_distance = ld.calculate(username_to_search, current_username);
+			int current_distance = ld.calculate(username_to_search, current_username);
     		if (current_distance < value_best_distance) {
-    			this.value_best_distance = current_distance;
-    			this.username_best_distance = current_username;
-    			
+    			System.out.println("thread: " + thread_order + " | order: " + j + " | username: " + current_username + " | " + current_distance + " | atual: " + username_best_distance);
+
+					value_best_distance = current_distance;
+					username_best_distance = current_username;
+
     			if(current_distance == 0) {
-    				break;
+    				return;
     			}
     		}				
 		}
