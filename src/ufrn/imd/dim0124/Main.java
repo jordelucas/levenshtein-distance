@@ -8,9 +8,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 public class Main {
-	public static int THREAD_SIZE = 1;
+	public static int THREAD_SIZE = 32000;
 	
 	public static void main(String[] args) throws IOException {
+		long start = System.currentTimeMillis();
+
 		LinkedHashSet<String> lhs = new LinkedHashSet<String>();
 
 		InputStream res = Main.class.getResourceAsStream("/animelists.csv");
@@ -23,8 +25,13 @@ public class Main {
 		
 		List<String> list = new ArrayList<String>(lhs);
 		
-		String result = new SearchWord().search(list, "thiffany", THREAD_SIZE);
+		String result = new SearchWord().search(list, "Sthephanny", THREAD_SIZE);
 		
 		System.out.println(result);
+		
+		long end = System.currentTimeMillis();
+		long delay = end - start;
+		
+		System.out.println("Time: " + delay);
 	}
 }

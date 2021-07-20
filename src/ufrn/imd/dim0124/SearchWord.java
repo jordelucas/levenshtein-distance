@@ -52,7 +52,7 @@ public class SearchWord implements Runnable {
 	private void runThread() {
 		LevenshteinDistance ld = new LevenshteinDistance();
 		int thread_order = Integer.parseInt(Thread.currentThread().getName());
-//		System.out.println(range);
+
 		for(int j = thread_order * range; j <= ((thread_order + 1) * range) - 1; j++) {
 			if(j >= list.size()) {
 				return;
@@ -62,10 +62,9 @@ public class SearchWord implements Runnable {
 
 			int current_distance = ld.calculate(username_to_search, current_username);
     		if (current_distance < value_best_distance) {
-    			System.out.println("thread: " + thread_order + " | order: " + j + " | username: " + current_username + " | " + current_distance + " | atual: " + username_best_distance);
-
-					value_best_distance = current_distance;
-					username_best_distance = current_username;
+    			
+				value_best_distance = current_distance;
+				username_best_distance = current_username;
 
     			if(current_distance == 0) {
     				return;
