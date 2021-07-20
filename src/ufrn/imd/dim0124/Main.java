@@ -11,13 +11,12 @@ public class Main {
 	public static final int DISTANCE_DEFAULT = 100;
 
 	public static void main(String[] args) throws IOException {
-		int count = 0;
+		long start = System.currentTimeMillis();
 
-		int position_best_distance = 0;
 		int value_best_distance = DISTANCE_DEFAULT;
 		String username_best_distance = "";
 
-		String username_to_search = "catarina";
+		String username_to_search = "Sthephanny";
 		
 		LinkedHashSet<String> lhs = new LinkedHashSet<String>();
 
@@ -31,13 +30,11 @@ public class Main {
 		
 		Iterator<String> itr = lhs.iterator();
         while (itr.hasNext()) {
-        	count++;
     		String current_username = itr.next();
     		int current_distance = LevenshteinDistance.calculate(username_to_search, current_username);
     		if (current_distance < value_best_distance) {
     			value_best_distance = current_distance;
     			username_best_distance = current_username;
-    			position_best_distance = count;
     			
     			if(current_distance == 0) {
     				break;
@@ -45,6 +42,11 @@ public class Main {
     		}
         }
 
-		System.out.println(position_best_distance + ": " + username_best_distance + " | " + value_best_distance);
+		System.out.println(username_best_distance);
+		
+        long end = System.currentTimeMillis();
+		long delay = end - start;
+		
+		System.out.println("Time: " + delay);
 	}
 }
